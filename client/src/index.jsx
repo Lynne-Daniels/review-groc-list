@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import $ from 'jquery';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -14,9 +16,12 @@ class App extends React.Component {
     }
   }
 
-  
   render () {
-    return null;
+    return (<div>
+      <h1>Grocery List</h1>
+      <AddGrocery />
+      <GroceryList />
+    </div>)
   }
 }
 
