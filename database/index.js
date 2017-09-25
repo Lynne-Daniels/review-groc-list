@@ -12,7 +12,7 @@ var selectAll = function(callback) {
   let sqlstring = 'SELECT * from groceries;';
   connection.connect();
   connection.query(sqlstring, (err, rows, fields) => {
-    console.log('retreived from DB: ', err, rows);
+    console.log('retreived from DB: ', err, rows[0].description);
     callback(/*idk*/); //TODO add rows or fields . someting  as param
   })
   
