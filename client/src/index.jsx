@@ -8,12 +8,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: [
-        {id: 1, quantity: 5, description: "frozen pizza"},
-        {id: 2, quantity: 10, description: "greek yogurt"},
-        {id: 3, quantity: 2, description: "wine"},
-        {id: 4, quantity: 1, description: "iced coffee"}
-      ]
+      list: []
     }
   }
 
@@ -28,7 +23,24 @@ class App extends React.Component {
     });
 
   }
-
+  componentWillMount(){
+    $.ajax({
+      url: 'http://localhost:3000/groceries',
+    }).done((data) =>{
+      console.log('ajax data returned: ', data)
+      this.setState({list: data})
+    }).fail((err) => {
+      console.log('ajax errorrrr: ', err);
+    })
+    console.log('componentWillMount was invoked.');
+/*    this.setState( {list :[
+            {id: 1, quantity: 5, description: "frozen pizza"},
+            {id: 2, quantity: 10, description: "greek yogurt"},
+            {id: 3, quantity: 2, description: "wine"},
+            {id: 4, quantity: 1, description: "iced coffee"}
+          ]}
+      )*/
+  }
   render () {
     return (<div>
       <h1>Grocery List</h1>

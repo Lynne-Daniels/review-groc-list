@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var db = require('../database');
 
 var groceryList = [
   {id: 1, quantity: 5, description: "frozen pizza"},
@@ -16,12 +17,14 @@ app.use(bodyParser.json());
 //GET route
 app.get('/groceries', function(req, res) {
   res.status(200);
+  db.selectAll(()=>{console.log('whew, made it to the server')})
   res.send(groceryList);
 })
 //POST route
 app.post('/groceries', function(req, res) {
   console.log('req.body', req.body);
   groceryList.push(req.body);
+  db.insertOne(req.body, () => {console.log('server requesting db insert')})
   res.status(201);
   res.end('Information was received');
 })

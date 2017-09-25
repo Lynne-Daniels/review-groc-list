@@ -7,12 +7,28 @@ var connection = mysql.createConnection({
   database : 'review'    //@TODO: Ensure database name matches the database you created
 });
 
-var selectAll = function() {
+var selectAll = function(callback) {
   //@TODO
-};
+  let sqlstring = 'SELECT * from groceries;';
+  connection.connect();
+  connection.query(sqlstring, (err, rows, fields) => {
+    console.log('retreived from DB: ', err, rows);
+    callback(/*idk*/); //TODO add rows or fields . someting  as param
+  })
+  
 
-var insertOne = function() {
+};
+// input {quantity: , description:}, callback
+var insertOne = function(item, callback) {
   //@TODO
+  let sqlstring = 'INSERT INTO review (quantity, description)\
+  VALUES (' + item.quantity + ',' + item.description +')';
+  connection.connect();
+  connection.query(sqlstring, (err, rows, fields) => {
+    console.log('inserted to DB: ', err, rows, fields)
+    callback(/*idk*/); //TODO add rows or fields . someting  as param
+  })
+
 };
 
 module.exports.selectAll = selectAll;
